@@ -1,0 +1,41 @@
+image: Visual Studio 2017
+environment:
+  nodejs_version: "6.9.1"
+  global:
+    DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+    DOTNET_CLI_TELEMETRY_OPTOUT: 1
+# Install scripts. (runs after repo cloning)
+install:
+  # Download .NET Core 2.0 SDK and add to PATH
+  - ps: $urlCurrent = "https://dotnetcli.azureedge.net/dotnet/Sdk/2.0.0/dotnet-sdk-2.0.0-win-x64.zip"
+  - ps: $env:DOTNET_INSTALL_DIR = "$pwd\.dotnetsdk"
+  - ps: mkdir $env:DOTNET_INSTALL_DIR -Force | Out-Null
+  - ps: $tempFileCurrent = [System.IO.Path]::GetTempFileName()
+  - ps: (New-Object System.Net.WebClient).DownloadFile($urlCurrent, $tempFileCurrent)
+  - ps: Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory($tempFileCurrent, $env:DOTNET_INSTALL_DIR)
+  - ps: $env:Path = "$env:DOTNET_INSTALL_DIR;$env:Path"
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  - ps: $env:BuildNumber= $env:APPVEYOR_BUILD_NUMBER
+init:
+  - git config --global core.autocrlf true
+build_script:
+  - dotnet --version
+  - dotnet restore
+  - dotnet build -c Release
+  - dotnet pack -c Release
+test_script:
+  - dotnet test -c Release .\test\Orchard.Tests\Orchard.Tests.csproj
+clone_depth: 1
+test: on
+artifacts:
+- path: '**\*.nupkg'
+deploy:
+  on:
+    branch: master
+  provider: NuGet
+  server: https://www.myget.org/F/orchardcore-preview/api/v2/package
+  api_key:
+    secure: 8Fp2ETunhU6PvhlotuQXTZ7WkG1FikJ3BM7YLAZyfmbpy00knABu5yL7MhJ9uNcl
+  skip_symbols: true
+  artifact: /.*\.nupkg/

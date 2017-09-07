@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{58EDC0E7-C978-498B-855D-3461D75E0CA7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kentico.Web.Mvc</RootNamespace>
+    <AssemblyName>Kentico.Web.Mvc</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Kentico.Web.Mvc.XML</DocumentationFile>
+    <LangVersion>default</LangVersion>
+    <CodeAnalysisRuleSet>..\..\KenticoMvc.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Kentico.Web.Mvc.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationBootstrapper.cs" />
+    <Compile Include="ApplicationBuilder.cs" />
+    <Compile Include="ApplicationBuilderExtensions.cs" />
+    <Compile Include="ApplicationHttpModule.cs" />
+    <Compile Include="CrossOriginResourceSharing\CrossOriginResourceSharingWithCurrentSiteModule.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedCompareAttributeAdapter.cs" />
+    <Compile Include="FeatureSet.cs" />
+    <Compile Include="HelperMethods\RouteCollectionMapRoutesMethods.cs" />
+    <Compile Include="NotFoundHandler\AsyncActionInvokerWrapper.cs" />
+    <Compile Include="NotFoundHandler\AsyncResultWrapper.cs" />
+    <Compile Include="RouteCollectionExtensions.cs" />
+    <Compile Include="HttpContextExtensions.cs" />
+    <Compile Include="NotFoundHandler\ActionInvokerWrapper.cs" />
+    <Compile Include="NotFoundHandler\ControllerFactoryWrapper.cs" />
+    <Compile Include="NotFoundHandler\HandleNotFoundErrorAttribute.cs" />
+    <Compile Include="NotFoundHandler\HttpErrorsController.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizationHelper.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedDataTypeAttributeAdapter.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedMaxLengthAttributeAdapter.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedMinLengthAttributeAdapter.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedDataAnnotationsModelMetadataProvider.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedRangeAttributeAdapter.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedRegularExpressionAttributeAdapter.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedRequiredAttributeAdapter.cs" />
+    <Compile Include="DataAnnotationsLocalization\LocalizedStringLengthAttributeAdapter.cs" />
+    <Compile Include="IFeatureSet.cs" />
+    <Compile Include="IModule.cs" />
+    <Compile Include="HtmlHelperExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ExtensionPoint.cs" />
+    <Compile Include="HelperMethods\HtmlHelperResolveUrlsMethods.cs" />
+    <Compile Include="RouteHandlerWrapper.cs" />
+    <Compile Include="UrlHelperExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Kentico.Web.Mvc.nuspec" />
+    <None Include="NugetResources\ApplicationConfig.cs.pp" />
+    <None Include="NugetResources\PackageContentManager.ps1" />
+    <None Include="NugetResources\Views\web.config.install.xdt" />
+    <None Include="NugetResources\Views\web.config.uninstall.xdt" />
+    <None Include="NugetResources\web.config.install.xdt" />
+    <None Include="NugetResources\web.config.uninstall.xdt" />
+    <None Include="NugetResources\mimetypes.txt" />
+    <None Include="project.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

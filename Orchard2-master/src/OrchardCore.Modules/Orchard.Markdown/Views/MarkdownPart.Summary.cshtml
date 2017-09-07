@@ -1,0 +1,4 @@
+@using Orchard.Mvc.Utilities;
+@model Orchard.Markdown.ViewModels.MarkdownPartViewModel
+
+@Html.Raw(Model.Html.RemoveTags(true).Substring(0, 200))
